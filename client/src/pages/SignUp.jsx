@@ -25,6 +25,7 @@ const SignUp = () => {
         body: JSON.stringify(formData),
       });
       const data = await res.json();
+
       if (data.success === false) {
         setError(data.message);
         setLoading(false);
@@ -34,6 +35,7 @@ const SignUp = () => {
       setError(null);
       navigate("/sign-in");
     } catch (error) {
+      console.log(error);
       setLoading(false);
       setError(error.message);
     }
@@ -50,13 +52,15 @@ const SignUp = () => {
           className="border p-3 rounded-lg"
           id="username"
           onChange={handleChange}
+          required
         />
         <input
-          type="text"
+          type="email"
           placeholder="Email"
           className="border p-3 rounded-lg"
           id="email"
           onChange={handleChange}
+          required
         />
         <input
           type="password"
@@ -64,6 +68,7 @@ const SignUp = () => {
           className="border p-3 rounded-lg"
           id="password"
           onChange={handleChange}
+          required
           autoComplete="off"
         />
         <button
