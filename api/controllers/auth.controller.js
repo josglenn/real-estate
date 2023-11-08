@@ -22,11 +22,11 @@ export const signIn = async (req, res, next) => {
   try {
     const validUser = await User.findOne({ email: email });
     if (!validUser) {
-      return next(errorHandler(404, "User is not Found."));
+      return next(errorHandler(404, "User is not Found!"));
     }
     const validPassword = bcrypt.compareSync(password, validUser.password);
     if (!validPassword) {
-      return next(errorHandler(401, "Password is Incorrect."));
+      return next(errorHandler(401, "Password is Incorrect!"));
     }
     const { password: pass, ...info } = validUser._doc;
     const token = jwt.sign({ id: validUser._id }, process.env.JWT_SECRET);
