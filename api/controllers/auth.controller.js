@@ -7,6 +7,14 @@ export const signUp = async (req, res, next) => {
   const { username, email, password } = req.body;
   const hashPassword = bcrypt.hashSync(password, 10);
 
+  const existUser = await User.findOne({ username: username });
+  const existEmail = await User.findOne({ email: email });
+
+  if (existUser)
+    return next(errorHandler(401, "Username Exist, Choose another username!"));
+  if (existEmail)
+    return next(errorHandler(401, "Email Exist, Choose another email!"));
+
   const newUser = new User({ username, email, password: hashPassword });
 
   try {
