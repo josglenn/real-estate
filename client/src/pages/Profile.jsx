@@ -5,6 +5,7 @@ import {
   ref,
   uploadBytesResumable,
 } from "firebase/storage";
+import { Link } from "react-router-dom";
 import { app } from "../firebase";
 import {
   updateUserSuccess,
@@ -195,7 +196,14 @@ const Profile = () => {
         >
           {loading ? "loading.." : "Update"}
         </button>
+        <Link
+          to={"/create-listing"}
+          className=" text-center bg-green-700 disabled:text-opacity-70 text-white uppercase p-3 disabled:opacity-70 rounded-lg hover:opacity-80"
+        >
+          Create Listing
+        </Link>
       </form>
+
       <div className="flex justify-between my-4">
         <span onClick={handleDelete} className="text-red-500 cursor-pointer">
           Delete Account
